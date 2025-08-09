@@ -34,6 +34,8 @@
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.08); /* Subtler border */
+            /* New shadow using the background's gradient color for a glow effect */
+            box-shadow: 0 10px 40px rgba(35, 30, 66, 0.4);
         }
 
         /* Custom Scrollbar Styling */
@@ -84,7 +86,7 @@
     <div class="absolute inset-0 background-grid opacity-20"></div>
 
     <main class="z-10 text-center w-full max-w-4xl">
-        <div class="glass-card rounded-xl p-8 sm:p-12 shadow-2xl">
+        <div class="glass-card rounded-xl p-8 sm:p-12"> 
             <a href="#" class="inline-block text-5xl font-bold text-white mb-4">RA1</a>
 
             <h1 id="coming-soon-title" class="text-4xl md:text-5xl font-bold text-white leading-tight mt-2">
