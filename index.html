@@ -4,16 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RA1 is Coming Soon - evilcorp.in</title>
-    
-    <!-- Tailwind CSS -->
+
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts: Inter -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Custom Styles & Configuration -->
+
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -30,7 +27,7 @@
                 linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
             background-size: 40px 40px;
         }
-        
+
         /* Glassmorphism base style */
         .glass-card {
             background-color: rgba(255, 255, 255, 0.05);
@@ -55,13 +52,13 @@
         ::-webkit-scrollbar-thumb:hover {
             background: rgba(59, 50, 112, 0.6); /* Very subtle hover, no size change */
         }
-        
+
         /* New revealing effect styles */
         #coming-soon-title {
-            display: flex; 
+            display: flex;
             justify-content: center;
             /* Set a min-height to prevent layout shift */
-            min-height: 80px; 
+            min-height: 80px;
         }
         @media (max-width: 768px) {
             #coming-soon-title {
@@ -88,10 +85,10 @@
 
     <div class="absolute inset-0 background-grid opacity-20"></div>
 
-    <main class="z-10 text-center">
+    <main class="z-10 text-center w-full max-w-4xl">
         <div class="glass-card rounded-xl p-8 sm:p-12 shadow-2xl">
             <a href="#" class="inline-block text-5xl font-bold bg-gradient-to-r from-white to-gray-400 text-transparent bg-clip-text mb-4">RA1</a>
-            
+
             <h1 id="coming-soon-title" class="text-4xl md:text-5xl font-bold text-white leading-tight mt-2">
                 Something Big is Coming
             </h1>
@@ -99,23 +96,22 @@
                 The next generation of red teaming hardware is almost here. Get ready to experience unparalleled performance and discretion.
             </p>
 
-            <!-- Countdown Timer -->
-            <div id="countdown-timer" class="flex justify-center gap-4 sm:gap-8 my-10">
-                <div>
+            <div id="countdown-timer" class="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 my-10">
+                <div class="glass-card rounded-lg p-4">
                     <div id="days" class="text-4xl sm:text-6xl font-bold">00</div>
-                    <div class="text-xs sm:text-sm text-gray-400">Days</div>
+                    <div class="text-xs sm:text-sm text-gray-400 mt-1">Days</div>
                 </div>
-                <div>
+                <div class="glass-card rounded-lg p-4">
                     <div id="hours" class="text-4xl sm:text-6xl font-bold">00</div>
-                    <div class="text-xs sm:text-sm text-gray-400">Hours</div>
+                    <div class="text-xs sm:text-sm text-gray-400 mt-1">Hours</div>
                 </div>
-                <div>
+                <div class="glass-card rounded-lg p-4">
                     <div id="minutes" class="text-4xl sm:text-6xl font-bold">00</div>
-                    <div class="text-xs sm:text-sm text-gray-400">Minutes</div>
+                    <div class="text-xs sm:text-sm text-gray-400 mt-1">Minutes</div>
                 </div>
-                <div>
+                <div class="glass-card rounded-lg p-4">
                     <div id="seconds" class="text-4xl sm:text-6xl font-bold">00</div>
-                    <div class="text-xs sm:text-sm text-gray-400">Seconds</div>
+                    <div class="text-xs sm:text-sm text-gray-400 mt-1">Seconds</div>
                 </div>
             </div>
         </div>
@@ -125,7 +121,6 @@
         </footer>
     </main>
 
-    <!-- JavaScript for Interactivity -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // --- Title Reveal Effect ---
@@ -136,7 +131,7 @@
                 text.split('').forEach((char, index) => {
                     const span = document.createElement('span');
                     // Use a non-breaking space for spaces to ensure they take up space and don't cause wrapping
-                    span.innerHTML = char === ' ' ? '&nbsp;' : char; 
+                    span.innerHTML = char === ' ' ? '&nbsp;' : char;
                     span.style.animationDelay = `${index * 0.05}s`; // Stagger the animation
                     comingSoonTitle.appendChild(span);
                 });
@@ -156,7 +151,10 @@
 
                 if (distance < 0) {
                     clearInterval(updateCountdown);
-                    countdownElement.innerHTML = '<div class="text-4xl font-bold text-white">Launched!</div>';
+                    // Update the main countdown container when launched
+                    if(countdownElement) {
+                        countdownElement.innerHTML = '<div class="col-span-2 sm:col-span-4 text-4xl font-bold text-white">Launched!</div>';
+                    }
                     return;
                 }
 
