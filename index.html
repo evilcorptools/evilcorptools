@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RA1 is Coming Soon - evilcorp.in</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a10; /* Very dark base */
+            color: #e5e7eb;
+            /* New gradient background based on reference */
+            background-image: radial-gradient(ellipse at top, #231e42 0%, #0a0a10 60%);
+            background-repeat: no-repeat;
+            min-height: 100vh;
+        }
+        .background-grid {
+            background-image:
+                linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* Glassmorphism base style */
+        .glass-card {
+            background-color: rgba(10, 10, 16, 0.3); /* Darker, less white transparent background */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08); /* Subtler border */
+            /* New shadow using the background's gradient color for a glow effect */
+            box-shadow: 0 10px 40px rgba(35, 30, 66, 0.4);
+        }
+
+        /* Custom Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(35, 30, 66, 0.4);
+            border-radius: 10px;
+            border: 3px solid transparent;
+            background-clip: content-box;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(59, 50, 112, 0.6);
+        }
+
+        /* Revealing effect styles for title */
+        #coming-soon-title {
+            /* Set a min-height to prevent layout shift during animation */
+            min-height: 120px;
+        }
+        @media (max-width: 768px) {
+            #coming-soon-title {
+                min-height: 100px;
+            }
+        }
+        
+        #coming-soon-title .word {
+            display: inline-block; /* Necessary for transform */
+            opacity: 0;
+            transform: translateY(20px);
+            animation: reveal-word 0.6s ease forwards;
+        }
+
+        @keyframes reveal-word {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    <div class="absolute inset-0 background-grid opacity-20"></div>
+
+    <main class="z-10 text-center w-full max-w-4xl">
+        <div class="glass-card rounded-xl p-8 sm:p-12"> 
+            <a href="#" class="inline-block text-5xl font-bold text-white mb-4">RA1</a>
+
+            <h1 id="coming-soon-title" class="text-4xl md:text-5xl font-bold text-white leading-tight mt-2">
+                Something Big is Coming
+            </h1>
+            <p class="mt-4 text-lg text-gray-400 max-w-xl mx-auto">
+                The next generation of red teaming hardware is almost here. Get ready to experience unparalleled performance and discretion.
+            </p>
+
+            <div id="countdown-timer" class="flex justify-center gap-4 sm:gap-8 my-10">
+                <div>
+                    <div id="days" class="text-4xl sm:text-6xl font-bold">00</div>
+                    <div class="text-xs sm:text-sm text-gray-400">Days</div>
+                </div>
+                <div>
+                    <div id="hours" class="text-4xl sm:text-6xl font-bold">00</div>
+                    <div class="text-xs sm:text-sm text-gray-400">Hours</div>
+                </div>
+                <div>
+                    <div id="minutes" class="text-4xl sm:text-6xl font-bold">00</div>
+                    <div class="text-xs sm:text-sm text-gray-400">Minutes</div>
+                </div>
+                <div>
+                    <div id="seconds" class="text-4xl sm:text-6xl font-bold">00</div>
+                    <div class="text-xs sm:text-sm text-gray-400">Seconds</div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="mt-8 text-center text-gray-600 text-sm">
+            <p>&copy; 2025 evilcorp.in. All Rights Reserved.</p>
+        </footer>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- Title Reveal Effect (Word by Word) ---
+            const comingSoonTitle = document.getElementById('coming-soon-title');
+            if (comingSoonTitle) {
+                const text = comingSoonTitle.textContent.trim();
+                comingSoonTitle.innerHTML = ''; // Clear original text
+                
+                text.split(' ').forEach((word, index) => {
+                    const wordSpan = document.createElement('span');
+                    wordSpan.textContent = word;
+                    wordSpan.className = 'word'; // Assign class for styling
+                    wordSpan.style.animationDelay = `${index * 0.15}s`; // Stagger the animation per word
+                    
+                    comingSoonTitle.appendChild(wordSpan);
+
+                    // Add a space after each word except the last one
+                    if (index < text.split(' ').length - 1) {
+                        comingSoonTitle.appendChild(document.createTextNode(' '));
+                    }
+                });
+            }
+
+            // --- Countdown Timer Logic ---
+            const countdownElement = document.getElementById('countdown-timer');
+            // Set launch date: 30 days from August 9th, 2025, 6:30 PM IST
+            // Note: Months are 0-indexed in JS (0=Jan, 7=Aug)
+            const launchDate = new Date(Date.UTC(2025, 7, 9, 18, 30, 0) - (5.5 * 60 * 60 * 1000)); // Convert IST to UTC
+            launchDate.setDate(launchDate.getDate() + 30);
+            const launchTimestamp = launchDate.getTime();
+
+            const updateCountdown = setInterval(function() {
+                const now = new Date().getTime();
+                const distance = launchTimestamp - now;
+
+                if (distance < 0) {
+                    clearInterval(updateCountdown);
+                    countdownElement.innerHTML = '<div class="text-4xl font-bold text-white">Launched!</div>';
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById('days').innerText = String(days).padStart(2, '0');
+                document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+                document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+            }, 1000);
+        });
+    </script>
+
+</body>
+</html>
